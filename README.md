@@ -1,4 +1,4 @@
-# Data Analysis Projects
+# Data Analytics Projects
 
 Keep updating
 
