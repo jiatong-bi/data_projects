@@ -1,0 +1,165 @@
+---
+title: "Weighted Association Rule Mining Reasearch Project"
+subtitle: "Movie Casting Problem"
+author: 
+
+date: 'April 5, 2022'
+output:
+  pdf_document: 
+         latex_engine: xelatex
+  html_document: default
+header-includes:
+   - \usepackage{setspace}
+   - \doublespacing
+---
+
+```{r, global_options, include=FALSE}
+knitr::opts_chunk$set(message=FALSE) 
+```
+
+\doublespacing
+
+
+# Problem Statement
+
+The movie industry is going through hard times with outgoing pandemics, leading to motion pictures being either shut down or postponed. However, the film and TV industries are digging for another way to live by providing shows online. The producers want to create shows that the people would like to order through internet platforms to maintain and survive during the pandemic period. Therefore, the producers should become extra cautious when they are choosing the casts, the improper actor decision could completely disengage a viewer from the plot, and a great casting team could make the box office revenue guaranteed. In this way, one of the current problems in the movie industry is casting, and it could be solved by using weighted association rule mining.
+
+
+# Literature Review
+The algorithm of the MINWAL (C. H. Cai, 1998) provides a new thought about a representation of the support, called "weighted support." His research provides the idea that one large item set represents all itemsets that are large. According to the research from Mining weighted association rules (Lu, 2001), association rule mining is a rule-based data mining technique that discovers interesting patterns from a large database, which is used to identify the associations and correlations between itemset of large amounts of data in transactional databases or relational databases. "Diapers and beer" is a classic example of association rule mining. Let X, Y each be an itemset, X => Y a rule, and T be a transaction database, Let $I = {i_1, i_1, i_3,…, i_n}$ be a set of n distinct items. An association rule is an implication of the form X=>Y, where $X, Y \subset I$, and $X \cap Y =\phi $. Support represents the frequency of itemset occurrences throughout T. Assuming that there are N pieces of data in T, the formula for calculating support is: $\sup(X) = \sum(x)/N$. Confidence is expressed as to how often the rule X => Y occurs throughout T. The confidence value represents the proportion of transactions that also include Y in the total transactions under the condition that X is included. Also assume that there are N pieces of data in T, then the calculation formula of confidence is: $Conf(X=>Y) = \sup(X \cup Y)/\sup(x)$ (Tao, 2003).
+
+The itemset is no longer simply tallied as they appear in a transaction in association rule mining. Instead of being selected on the basis of their frequency, they are chosen for their significance in the dataset. Because of the change in counting techniques, traditional support should be adapted to weighted support. The aim of applying for weighted support in the mining process is to make use of the weight. For example, in the shopping records of the supermarket, each record and each product will correspond to the corresponding profit. If we add weights to the records and products according to the profit level, we may be able to dig out more profitable and frequent rules. Based on this idea, Based on this idea, the weighted association rule mining algorithm is produced (Tao, 2003). The WARM algorithm method by Feng Tao used a fresh one called the significant weighted support method, and it selected some significant itemsets to apply the weighted association rules. 
+
+
+There is very little research that investigates the research question, which is Weighted Association Rule Mining for Finding Actors that Have Worked Together. The work of Tomasz Starakiewicz (2022) was concerned with a similar topic. He aimed to find actors who were best friends. Such a goal is equivalent to finding actors who would not conflict with each other. In doing so, Starakiewicz (2022) established the hypothesis of using association rules to identify groups of artists who worked together more often. According to the research findings, filmmaking exploded in popularity in 2000, with the movie industry growing each year. However, in 2020, it lost a significant share of its revenues and still has not recovered from the pandemic and its effects. In terms of yearly releases, in this case, the directors, managers, and other staff members make up the largest share of the movie workforce. The researcher also suggested that Hollywood is diverse and that multiple actors have many connections with other actors; there are "cliques" of actors who have starred in more than 30 motion pictures together. In this case, the graph-based plots turned out to be the most useful for visualizing career relationships between artists, with the Kulczynski metric being the most appropriate for data where many null transactions are present, which is also a perfect fit for movie data. Thus, Starakiewicz (2022) used association rules in order to show that there are groups of actors who are more likely to be friends with each other, as they have been in many movies together.
+
+\newpage
+
+# Methodology
+
+The methodology used is weighted association rule mining. It can help find the actors who are most likely to be in the movie together while using revenues as the weight. The fundamental premise of association rule mining is that when events occur together more often than their individual occurrences would predict, such joint cooccurrence creates an intriguing pattern (Shmueli et al., 2018). The method is sometimes referred to as “market basket analysis” since it emerged from the investigation of consumer transaction data in order to discover the correlations between different commodities purchased. Any film’s fundamental logic is based on the if-then connection or logic, which is expressed in probabilistic terms. The IF part is called antecedent and THEN part consequent (Shmueli et al., 2018). When it comes to association rules, there are a few concepts that one should know. An association is simply the occurrence of two or more objects or people in the same place at the same time. 
+
+
+A set of objects is a collection of one or more things, being denoted by the notation {item1, item2}. A transaction refers to a collection of elements that occur simultaneously in observation; in this particular problem, the transaction would be the main casting list of each movie. A popular marketing transaction is the “market basket,” a collection of items bought or evaluated for purchase at the same moment. Any pair of data points is deemed a transaction, even though the word “transaction” might feel strange in this context. For instance, the collection of web pages seen by a user during a session would be considered a transaction. A rule specifies the occurrence of a set of events or items across transactions as a result of the previous set of conditions. For example, the rule “Amy Adams => Henry Cavill” expresses the relationship between Amy Adams and Henry Cavill. Another example of an association rule is {Jennifer Lawrence, Woody Harrelson} => {Josh Hutcherson}, which means that “if the movie contains Jennifer Lawrence and Woody Harrelson, then Josh Hutcherson would also play in this movie. Thus, the association rule mining would help uncover common patterns of co-working actors.
+
+In addition, one ought to understand the common metrics associated with the association rules mining. The first metric is support. It refers to the proportion of all transactions that contain the set. The metric is often reported as the percentage of the total records in the database (Shmueli et al., 2018). For example, if {Diane Lane, Henry Cavill} appears in 20 out of 1000 transactions, then support ({Diane Lane, Henry Cavill}) = 20/1000 = 0.020. It is irrelevant if those transactions include additional items, support is defined individually for each distinct group of items (Acharya, 2018). The second metric is confidence. Such measure indicates the degree of support for the cooccurrence of all items in a rule, conditional on the left-hand set support alone (Acharya, 2018). In other words, it is the ratio of the number of transactions with both antecedent and consequent item sets to the number of transactions with just the antecedent item. For example, one may consider the rule {James McAvoy} -> {Michael Fassbender}. If {James McAvoy} occurs in 5% of transactions, meaning that its support is equal to 0.05, and {James McAvoy, Michael Fassbender} happens in 1%, the confidence ({James McAvoy}->{Michael Fassbender}) = 0.01/0.5 = 0.02. In other words, Michael Fassbender appears alongside James McAvoy 2% of the time that James McAvoy appears. 
+
+The third metric is lift. It states how more likely the joint support of each element happens than each independently. It is a ratio of confidence of the rule to the confidence, assuming the independence of both antecedent and decedent. For example, if the support for Allen Leech is 1%, the support for Keira Knightley is 2%, and the support for both Allen Leech and Keira Knightley is 5%, it means that their combination happens 2.5 times (= 0.05/(0.01 * 0.02)) more than the two items independently. A lift of suggests that the rule is significant and useful (Shmueli et al., 2018). The task of a researcher is to find such items and their combinations that are likely to result in higher support, confidence, and lift. Usually, these values are set to 0.01, 0.10, and 0.20, respectively. R package “arules” and “arulesviz” are primarily used to define association rules and visualize them, respectively. 
+
+In the weight association rule mining, weights are assigned by the user, which can be any metric, such as cost, revenues, or profits, instead of probabilities. Typically, such elements are identified through the use of a threshold. Only items or their combinations exceeding this threshold would be considered. 
+
+\newpage
+# Results
+In this study, transaction data is represented in the form of a transaction database, with each row representing a list of actors who appeared in a single film (see Figure 1). Note that the maximum number of main actors in each transaction (movie) is limited to five.
+
+```{r echo=FALSE, out.width='65%', fig.cap = "Movie Cast Transactions", fig.align='center'}
+knitr::include_graphics('E:/Hogwarts/UOttawa/DataMining/research/figure 1.png')
+```
+These days, suppose that producers want to know with 100% confidence which actors would be auditioned, where the support (occurrence of each actor in transactions) is not significant. Only two factors play a role in how the rules would be chosen. Taking into consideration the requirements, the approximate values for such factors would be a support of 0.003 and confidence of 0.9. The weights would be derived from the box office revenues of the movies (see Figure 2).
+
+```{r echo=FALSE, out.width='65%', fig.cap = "Box Office Revenues", fig.align='center'}
+knitr::include_graphics('E:/Hogwarts/UOttawa/DataMining/research/figure 2.png')
+```
+
+\newpage
+From Figure 3, all the rules have confidence of 1 and support of 0.0039. In this case, the rule with the highest lift would indicate better value for the researcher. Hence, “David Oyelowo, Richard Jenkins” => “Alexia Fast” has the highest significance. Note that the other ten rules also have the highest lift.
+
+```{r echo=FALSE, out.width='65%', fig.cap = "Highest Lift Analyzing Results", fig.align='center'}
+knitr::include_graphics('E:/Hogwarts/UOttawa/DataMining/research/figure 3.png')
+```
+
+
+
+All the weighted association rules were visualized on the graph (see Figure 4). The graph indicates that there are three actor cliques or groups, where each group consists of five actors or actresses. The first group of actors and actresses is {Bella Thorne, Jason Lee, Josh Green, Tony Hale, Kimberly Williams-Paisley}. The second group of actors and actresses is comprised of {Allen Leech, Rory Kinnear, Benedict Cumberbatch, Matthew Goode, and Keira Knightley}. The third group of actors and actresses is {Eugene Levey, Jason Biggs, Sean William Scott, Tara Reid, and Allison Hannigan}. A casting manager or movie director can use such outcomes when choosing a cast by deciding on the actors who are strongly connected with other actors (have multiple connections and belong to the same actor clique) and are likely to be associated with higher revenues.
+
+
+```{r echo=FALSE, out.width='65%', fig.cap = "Graph of Weighted Association Rules", fig.align='center'}
+knitr::include_graphics('E:/Hogwarts/UOttawa/DataMining/research/figure 4.png')
+```
+
+
+
+
+\clearpage
+
+# Conclusion
+
+Therefore, the study addresses the problem of the movie industry, which is to reduce the chance of actors being incompatible with each other, causing conflicts on the set and potentially reducing the potential profits of the film. In doing so, it was proposed to use weighted association rule mining to identify groups or cliques of actors that had extensive experience working with each other, which indicates that they are comfortable with each other and who are associated with higher box office revenues. Research has found that these actor groups or cliques do exist and that there are three of them.
+
+
+\newpage
+
+# Reference
+
+[1] Acharya, S. (2018). Data analytics using R. McGraw-Hill Education (India) Private Limited.
+
+[2] Bose, S. D. (2022, January 2). The 10 worst casting choices of all time. Far Out. https://faroutmagazine.co.uk/the-10-worst-casting-choices-of-all-time/
+
+[3] Lu, S., Hu, H., & Li, F. (2001). Mining weighted association rules. Intelligent data analysis, 5(3), 211-225.
+
+[4] Tao, F., Murtagh, F., & Farid, M. (2003, August). Weighted association rule mining using weighted support and significance framework. In Proceedings of the ninth ACM SIGKDD international conference on Knowledge discovery and data mining (pp. 661-666).
+
+[5] Shelton, J. (2021, September 23). Co-stars who totally hated each other. Ranker. https://www.ranker.com/list/co-stars-who-hated-each-other/jacob-shelton
+
+[6] Shmueli, G., Bruce, P. C., Yahav, I., Patel, N. R., Lichtendahl Jr., K. C. (2018). Data mining for business analytics: Concepts, techniques, and applications in R. John Wiley & Sons, Inc.
+
+[7] Starakiewicz, T. (2022). Who are the best buddies in the movie industry? Let’s use association rules to find out! RPubs. https://rpubs.com/tjstarak/movie-assoc-rule-mining
+
+[8] C.H. Cai, A.W.C. Fu, C.H. Cheng, and W.W. Kwong, “Mining Association Rules with Weighted Items,” Proc. IEEE Int'l Database Eng. and Applications Symp. (IDEAS'98), pp. 68-77, 1998.
+
+
+
+\newpage
+
+\singlespacing
+
+# Appendix: All code for this report
+
+```{r ref.label=knitr::all_labels(), echo=TRUE, eval=FALSE}
+
+library (arules)
+library(arulesViz)
+
+actor.dir = "https://raw.githubusercontent.com/Willard98/rproj/main/movie_actors.csv"
+movie.dir = "https://raw.githubusercontent.com/Willard98/rproj/main/Movie-Data.csv"
+
+movie_actors <- read.transactions(actor.dir, sep= ",") 
+
+data <- read.csv(movie.dir, sep = ",")
+
+str(data)
+
+weights <- as.double(data$Box.Office.Revenue....)
+
+str(weights)
+
+str(movie_actors)
+head(movie_actors)
+summary(movie_actors)
+
+transactionInfo(movie_actors) <- data.frame(weight = weights)
+
+inspect(movie_actors[1:40])
+
+
+# Get the association rules based on apriori algo
+rules <- apriori(movie_actors, parameter = list(supp = 0.003, conf = 1))
+
+## mine weighed support itemsets
+s <- weclat(movie_actors, parameter = list(support = 0.003),
+            control = list(verbose = TRUE))
+
+inspect(sort(s))
+
+## create association rules
+r <- ruleInduction(s, conf = 0.9)
+inspect(r)
+
+df <- as(r, "data.frame") 
+df = df[order(df$lift, df$confidence), ]
+View(df)
+
+#visualizing the rules
+plot(r, method = 'graph', interactive = T)
+
+```
